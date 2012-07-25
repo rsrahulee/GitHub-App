@@ -1,0 +1,87 @@
+package com.github.branch;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
+import com.github.helper.AppStatus;
+import com.github.helper.Constants;
+import com.github.repository.RepositoryActivity;
+import com.github.rest.RestClient;
+
+public class BranchTask extends AsyncTask<String, Void, String> {
+
+	private RepositoryActivity context;
+	AppStatus mAppStatus;
+	private String strUserName;
+	private String strRepoName;
+	Handler mhandler;
+
+	public String getStrUserName() {
+		return strUserName;
+	}
+
+	public void setStrUserName(String strUserName) {
+		this.strUserName = strUserName;
+	}
+
+	public BranchTask(RepositoryActivity context, String userName, String repoName) {
+		this.context = context;
+		this.strUserName = userName;
+		this.strRepoName = repoName;
+		mAppStatus = new AppStatus();
+	}
+
+	@Override
+	protected String doInBackground(String... userName) {
+		// TODO Auto-generated method stub
+
+		String strJsonReponse = null;
+
+		List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+
+		params.add(new BasicNameValuePair(Constants.AUTH_KEY, mAppStatus.getSharedStringValue(Constants.AUTH_KEY)));
+
+		params.add(new BasicNameValuePair("username", userName[0]));
+		params.add(new BasicNameValuePair("repository", strRepoName));
+
+		try {
+			strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strBranch, "GET", params);
+
+		} catch (IOException e) {
+			context.dismissDialog(0);
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return strJsonReponse;
+
+	}
+
+	@Override
+	protected void onPostExecute(String strJsonReponse) {
+
+		Log.i("STRJSON RESPONSE::::", String.valueOf(strJsonReponse));
+
+		if (strJsonReponse.equals("[]")) {
+
+			context.dismissDialog(0);
+
+			Toast.makeText(context, "No branches for this repository", Toast.LENGTH_SHORT).show();
+
+			Log.i("JSON RESPONSE::::", "Data not found...!!");
+
+		} else {
+			/* RepositoryActivity' activity */
+
+			context.dismissDialog(0);
+			context.branchResponce(strJsonReponse);
+		}
+	}
+}
