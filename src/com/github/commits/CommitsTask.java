@@ -56,7 +56,10 @@ public class CommitsTask extends AsyncTask<String, Void, String> {
 		params.add(new BasicNameValuePair(Constants.BRANCH, strBranchName));
 
 		try {
-			strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strCommits, "GET", params);
+			if (mAppStatus.isOnline(context))
+				strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strCommits, "GET", params);
+			else
+				context.dismissDialog(0);
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -64,6 +64,7 @@ public class OrganisationRepositoryActivity extends Activity {
 
 		Log.d("repo response", strJsonResponse);
 		getOrganisationRepository(strJsonResponse);
+		
 		btnMember = (Button) findViewById(R.id.buttonMember);
 		
 //		mRepositoryDBAdapter = new OrganisationRepositoryDBAdapter(this, Constants.OrgRepositoryTableName);
@@ -157,34 +158,56 @@ public class OrganisationRepositoryActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
 				showDialog(0);
-				if (mAppStatus.isOnline(OrganisationRepositoryActivity.this)) {
 
-					orgRepositoryName = (orgRepositoryData.get(position)).toString();
-					Log.d("Organisation Repository name---", "" + orgRepositoryName);
+				orgRepositoryName = (orgRepositoryData.get(position)).toString();
+				Log.d("Organisation Repository name---", "" + orgRepositoryName);
 
-					repoOwner = orgRepositoryData.get(position).owner.toString();
-					Log.d("Owner---", "" + repoOwner);
+				repoOwner = orgRepositoryData.get(position).owner.toString();
+				Log.d("Owner---", "" + repoOwner);
 
-					OrganisationBranchTask mBranchTask = new OrganisationBranchTask(
-							OrganisationRepositoryActivity.this, repoOwner, orgRepositoryName);
-					mBranchTask.execute(repoOwner);
-					//
-					// Intent i=new Intent(getParent(),
-					// OrganisationBranchActivity.class);
-					//
-					// i.putExtra("owner", repoOwner);
-					// i.putExtra("reponame", orgRepositoryName);
-					//
-					// GroupActivity parentActivity =
-					// (GroupActivity)getParent();
-					// parentActivity.startChildActivity("branch intent", i);
+				OrganisationBranchTask mBranchTask = new OrganisationBranchTask(
+						OrganisationRepositoryActivity.this, repoOwner, orgRepositoryName);
+				mBranchTask.execute(repoOwner);
+				//
+				// Intent i=new Intent(getParent(),
+				// OrganisationBranchActivity.class);
+				//
+				// i.putExtra("owner", repoOwner);
+				// i.putExtra("reponame", orgRepositoryName);
+				//
+				// GroupActivity parentActivity =
+				// (GroupActivity)getParent();
+				// parentActivity.startChildActivity("branch intent", i);
 
-				} else {
-					dismissDialog(0);
-					Log.d("Please check you internet connection", "Check");
-					// showMessage("Please check you internet connection!!");
-
-				}
+			
+//				if (mAppStatus.isOnline(OrganisationRepositoryActivity.this)) {
+//
+//					orgRepositoryName = (orgRepositoryData.get(position)).toString();
+//					Log.d("Organisation Repository name---", "" + orgRepositoryName);
+//
+//					repoOwner = orgRepositoryData.get(position).owner.toString();
+//					Log.d("Owner---", "" + repoOwner);
+//
+//					OrganisationBranchTask mBranchTask = new OrganisationBranchTask(
+//							OrganisationRepositoryActivity.this, repoOwner, orgRepositoryName);
+//					mBranchTask.execute(repoOwner);
+//					//
+//					// Intent i=new Intent(getParent(),
+//					// OrganisationBranchActivity.class);
+//					//
+//					// i.putExtra("owner", repoOwner);
+//					// i.putExtra("reponame", orgRepositoryName);
+//					//
+//					// GroupActivity parentActivity =
+//					// (GroupActivity)getParent();
+//					// parentActivity.startChildActivity("branch intent", i);
+//
+//				} else {
+//					dismissDialog(0);
+//					Log.d("Please check you internet connection", "Check");
+//					// showMessage("Please check you internet connection!!");
+//
+//				}
 			}
 		});
 	}

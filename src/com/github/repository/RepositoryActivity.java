@@ -103,17 +103,23 @@ public class RepositoryActivity extends Activity {
 			// getting all Repo Data from API into response
 			showDialog(0);
 
-			if (mAppStatus.isOnline(RepositoryActivity.this)) {
+			mRepositoryDBAdapter.deleteAll();
 
-				mRepositoryDBAdapter.deleteAll();
+			RepositoryTask mRepositoryTask = new RepositoryTask(this, userName);
+			mRepositoryTask.execute(userName);
+		
 
-				RepositoryTask mRepositoryTask = new RepositoryTask(this, userName);
-				mRepositoryTask.execute(userName);
-			} else {
-				dismissDialog(0);
-				generateList();
-				onListClick();
-			}
+//			if (mAppStatus.isOnline(RepositoryActivity.this)) {
+//
+//				mRepositoryDBAdapter.deleteAll();
+//
+//				RepositoryTask mRepositoryTask = new RepositoryTask(this, userName);
+//				mRepositoryTask.execute(userName);
+//			} else {
+//				dismissDialog(0);
+//				generateList();
+//				onListClick();
+//			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

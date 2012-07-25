@@ -138,21 +138,30 @@ public class OrganisationActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
 				showDialog(0);
-				if (mAppStatus.isOnline(OrganisationActivity.this)) {
 
-					orgName = (organisationData.get(position)).toString();
-					Log.d("Organisation name---", "" + orgName);
+				orgName = (organisationData.get(position)).toString();
+				Log.d("Organisation name---", "" + orgName);
 
-					OrganisationRepositoryTask mOrganisationRepositoryTask = new OrganisationRepositoryTask(
-							OrganisationActivity.this, orgName);
-					mOrganisationRepositoryTask.execute(orgName);
+				OrganisationRepositoryTask mOrganisationRepositoryTask = new OrganisationRepositoryTask(
+						OrganisationActivity.this, orgName);
+				mOrganisationRepositoryTask.execute(orgName);
 
-				} else {
-					dismissDialog(0);
-					Log.d("Please check you internet connection", "Check");
-					// showMessage("Please check you internet connection!!");
-
-				}
+			
+//				if (mAppStatus.isOnline(OrganisationActivity.this)) {
+//
+//					orgName = (organisationData.get(position)).toString();
+//					Log.d("Organisation name---", "" + orgName);
+//
+//					OrganisationRepositoryTask mOrganisationRepositoryTask = new OrganisationRepositoryTask(
+//							OrganisationActivity.this, orgName);
+//					mOrganisationRepositoryTask.execute(orgName);
+//
+//				} else {
+//					dismissDialog(0);
+//					Log.d("Please check you internet connection", "Check");
+//					// showMessage("Please check you internet connection!!");
+//
+//				}
 			}
 		});
 

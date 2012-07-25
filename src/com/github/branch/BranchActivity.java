@@ -160,32 +160,38 @@ public class BranchActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
 				showDialog(0);
+				
+				branchName = (branchData.get(position)).toString();
+				Log.d("branch name---", "" + branchName);
 
-				if (mAppStatus.isOnline(BranchActivity.this)) {
+				CommitsTask mCommitsTask = new CommitsTask(BranchActivity.this, branchName, userName, repoName);
+				mCommitsTask.execute(branchName);
 
-					branchName = (branchData.get(position)).toString();
-					Log.d("branch name---", "" + branchName);
-
-					CommitsTask mCommitsTask = new CommitsTask(BranchActivity.this, branchName, userName, repoName);
-					mCommitsTask.execute(branchName);
-
-					// Intent intent = new
-					// Intent(getParent(),CommitsActivity.class);
-					//
-					// intent.putExtra("username", userName);
-					// intent.putExtra("reponame", repoName);
-					// intent.putExtra("branchname",branchName);
-					// GroupActivity parentActivity =
-					// (GroupActivity)getParent();
-					// parentActivity.startChildActivity("commit intent",
-					// intent);
-
-				} else {
-					dismissDialog(0);
-					Log.d("Please check you internet connection", "Check");
-
-					// showMessage("Please check you internet connection!!");
-				}
+//				if (mAppStatus.isOnline(BranchActivity.this)) {
+//
+//					branchName = (branchData.get(position)).toString();
+//					Log.d("branch name---", "" + branchName);
+//
+//					CommitsTask mCommitsTask = new CommitsTask(BranchActivity.this, branchName, userName, repoName);
+//					mCommitsTask.execute(branchName);
+//
+//					// Intent intent = new
+//					// Intent(getParent(),CommitsActivity.class);
+//					//
+//					// intent.putExtra("username", userName);
+//					// intent.putExtra("reponame", repoName);
+//					// intent.putExtra("branchname",branchName);
+//					// GroupActivity parentActivity =
+//					// (GroupActivity)getParent();
+//					// parentActivity.startChildActivity("commit intent",
+//					// intent);
+//
+//				} else {
+//					dismissDialog(0);
+//					Log.d("Please check you internet connection", "Check");
+//
+//					// showMessage("Please check you internet connection!!");
+//				}
 			}
 		});
 	}

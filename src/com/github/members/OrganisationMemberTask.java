@@ -53,7 +53,11 @@ public class OrganisationMemberTask extends AsyncTask<String, Void, String> {
 		params.add(new BasicNameValuePair("organization", organisation[0]));
 
 		try {
-			strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strOrganisationMember, "GET", params);
+			if (mAppStatus.isOnline(context))
+				strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strOrganisationMember, "GET",
+						params);
+			else
+				context.dismissDialog(0);
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

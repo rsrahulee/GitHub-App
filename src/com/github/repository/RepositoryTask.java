@@ -51,7 +51,11 @@ public class RepositoryTask extends AsyncTask<String, Void, String> {
 		// params.add(new BasicNameValuePair("page", "1"));
 		params.add(new BasicNameValuePair("username", userName[0]));
 		try {
-			strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strRepository, "GET", params);
+			if (mAppStatus.isOnline(context)) {
+				strJsonReponse = RestClient.getInstance(context).doApiCall(Constants.strRepository, "GET", params);
+			} else {
+				context.dismissDialog(0);
+			}
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

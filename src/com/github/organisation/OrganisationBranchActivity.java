@@ -141,31 +141,51 @@ public class OrganisationBranchActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
 				showDialog(0);
-				if (mAppStatus.isOnline(OrganisationBranchActivity.this)) {
 
-					branchName = (branchData.get(position)).toString();
-					Log.d("branch name---", "" + branchName);
+				branchName = (branchData.get(position)).toString();
+				Log.d("branch name---", "" + branchName);
 
-					OrganisationCommitTask mCommitsTask = new OrganisationCommitTask(OrganisationBranchActivity.this,
-							branchName, owner, repoName);
-					mCommitsTask.execute(branchName);
+				OrganisationCommitTask mCommitsTask = new OrganisationCommitTask(OrganisationBranchActivity.this,
+						branchName, owner, repoName);
+				mCommitsTask.execute(branchName);
 
-					// Intent intent = new
-					// Intent(getParent(),OrganisationCommitActivity.class);
-					// intent.putExtra("owner", owner);
-					// intent.putExtra("reponame", repoName);
-					// intent.putExtra("branchname",branchName);
-					//
-					// GroupActivity parentActivity =
-					// (GroupActivity)getParent();
-					// parentActivity.startChildActivity("orgCommits intent",
-					// intent);
+				// Intent intent = new
+				// Intent(getParent(),OrganisationCommitActivity.class);
+				// intent.putExtra("owner", owner);
+				// intent.putExtra("reponame", repoName);
+				// intent.putExtra("branchname",branchName);
+				//
+				// GroupActivity parentActivity =
+				// (GroupActivity)getParent();
+				// parentActivity.startChildActivity("orgCommits intent",
+				// intent);
 
-				} else {
-					dismissDialog(0);
-					Log.d("Please check you internet connection", "Check");
-					// showMessage("Please check you internet connection!!");
-				}
+			
+//				if (mAppStatus.isOnline(OrganisationBranchActivity.this)) {
+//
+//					branchName = (branchData.get(position)).toString();
+//					Log.d("branch name---", "" + branchName);
+//
+//					OrganisationCommitTask mCommitsTask = new OrganisationCommitTask(OrganisationBranchActivity.this,
+//							branchName, owner, repoName);
+//					mCommitsTask.execute(branchName);
+//
+//					// Intent intent = new
+//					// Intent(getParent(),OrganisationCommitActivity.class);
+//					// intent.putExtra("owner", owner);
+//					// intent.putExtra("reponame", repoName);
+//					// intent.putExtra("branchname",branchName);
+//					//
+//					// GroupActivity parentActivity =
+//					// (GroupActivity)getParent();
+//					// parentActivity.startChildActivity("orgCommits intent",
+//					// intent);
+//
+//				} else {
+//					dismissDialog(0);
+//					Log.d("Please check you internet connection", "Check");
+//					// showMessage("Please check you internet connection!!");
+//				}
 			}
 		});
 	}

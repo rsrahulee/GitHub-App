@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.SlidingDrawer;
 import android.widget.Toast;
+
 import com.github.helper.AppStatus;
 import com.github.helper.Constants;
-import com.github.organisation.GroupOrganisationRepositoryActivity;
 import com.github.repository.GroupRepositoryActivity;
 
 public class SplashScreen extends Activity {

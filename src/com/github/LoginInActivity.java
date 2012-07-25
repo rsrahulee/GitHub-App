@@ -51,7 +51,7 @@ public class LoginInActivity extends Activity {
 					return;
 				}
 				btnLogin.setEnabled(false);
-				strUserName = strUserName.trim();
+//				strUserName = strUserName.trim();
 				validateUserName(strUserName);
 
 			}
@@ -59,17 +59,21 @@ public class LoginInActivity extends Activity {
 	}
 
 	public void validateUserName(final String userName) {
-
-		if (mAppStatus.isOnline(LoginInActivity.this)) {
-			showDialog(0);
-			LoginTask mLoginTask = new LoginTask(LoginInActivity.this, userName);
-			mLoginTask.execute(userName);
-
-		} else {
-			dismissDialog(0);
-			Log.v("SPLASH_SCREEN", "You are not online!!!!");
-			warningDialogBox("Please check you internet connection!!");
-		}
+		
+		showDialog(0);
+		LoginTask mLoginTask = new LoginTask(LoginInActivity.this, userName);
+		mLoginTask.execute(userName);
+		
+//		if (mAppStatus.isOnline(LoginInActivity.this)) {
+//			showDialog(0);
+//			LoginTask mLoginTask = new LoginTask(LoginInActivity.this, userName);
+//			mLoginTask.execute(userName);
+//
+//		} else {
+//			dismissDialog(0);
+//			Log.v("SPLASH_SCREEN", "You are not online!!!!");
+//			warningDialogBox("Please check you internet connection!!");
+//		}
 
 	}
 
